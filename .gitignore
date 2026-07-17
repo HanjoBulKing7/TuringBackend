@@ -1,0 +1,25 @@
+# Objetos de compilación de Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.nextReleaseBackup
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/.maven-wrapper.properties
+
+# Excluir la caché del IDE (IntelliJ, Eclipse, VS Code)
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+
+# Archivos de registro y temporales
+*.log
+.DS_Store
+Thumbs.db
