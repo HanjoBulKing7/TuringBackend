@@ -20,7 +20,7 @@ public class JwtUtils {
 
     private SecretKey secretKey;
 
-    private final long EXPIRATION_TIME = 100*60*40;
+    private final long EXPIRATION_TIME = 1000*60*40;
 
     @PostConstruct
     public void init() {

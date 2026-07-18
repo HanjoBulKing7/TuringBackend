@@ -1,5 +1,6 @@
 package com.example.ArpegioBackend.config;
 
+import com.example.ArpegioBackend.entity.Role;
 import com.example.ArpegioBackend.entity.Users;
 import com.example.ArpegioBackend.repository.UserDetailsRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +20,20 @@ public class AdminInitializer {
                 Users admin = new Users();
                 admin.setUsername("admin");
                 admin.setPassword(passwordEncoder.encode("admin1234"));
-                admin.setRole("ADMIN");
+                admin.setRole(Role.ADMIN);
 
                 userDetailsRepository.save(admin);
                 System.out.println("Admin has been created");
+            }
+
+            if(userDetailsRepository.findByUsername("user").isEmpty()){
+                Users admin = new Users();
+                admin.setUsername("user");
+                admin.setPassword(passwordEncoder.encode("user1234"));
+                admin.setRole(Role.USER);
+
+                userDetailsRepository.save(admin);
+                System.out.println("User has been created");
             }
         };
     }
