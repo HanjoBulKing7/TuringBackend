@@ -4,22 +4,21 @@ import com.example.ArpegioBackend.payload.ApiResponse;
 import com.example.ArpegioBackend.payload.CategoryDTO;
 import com.example.ArpegioBackend.payload.PageResponse;
 import com.example.ArpegioBackend.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
 
-    @GetMapping("/categories")
+    @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<CategoryDTO>>> getAllCategories(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
@@ -31,12 +30,40 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(categories);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<CategoryDTO>> getOneCategory(
+            @PathVariable Long id
+    ) {
+        ApiResponse<CategoryDTO> foundCategoryRes = categoryService.getCategory(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(foundCategoryRes);
+    }
+
     @PostMapping
-    public ResponseEntity addCategory(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<ApiResponse<CategoryDTO>> addCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
 
         ApiResponse<CategoryDTO> savedRes = categoryService.addCategory(categoryDTO);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(savedRes);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<CategoryDTO>> updateCategory(
+            @PathVariable Long id,
+            @Valid @RequestBody CategoryDTO categoryDTO) {
+
+        ApiResponse<CategoryDTO> updatedRes = categoryService.updateCategory(id, categoryDTO);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedRes);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Long id){
+
+        categoryService.deleteCategory(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

@@ -42,8 +42,19 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth->
                                 auth
-                                        .requestMatchers("/login").permitAll()
-                                        .requestMatchers("/signup").permitAll()
+                                        .requestMatchers("/api/auth/**").permitAll()
+
+                                        .requestMatchers(HttpMethod.GET, "/api/**")
+                                        .hasAnyRole("USER", "ADMIN")
+
+                                        .requestMatchers(HttpMethod.POST, "/api/**")
+                                        .hasRole("ADMIN")
+
+                                        .requestMatchers(HttpMethod.PUT, "/api/**")
+                                        .hasRole("ADMIN")
+
+                                        .requestMatchers(HttpMethod.DELETE, "/api/**")
+                                        .hasRole("ADMIN")
                                         .anyRequest().authenticated())
                 .addFilterBefore(
                         jwtAuthFilter, UsernamePasswordAuthenticationFilter.class
