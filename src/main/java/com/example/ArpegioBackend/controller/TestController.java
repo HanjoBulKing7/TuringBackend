@@ -14,7 +14,7 @@ public class TestController {
     }
 
     @DeleteMapping("/health")
-    @PreAuthorize("hasAuthority('UPDATE')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteHealth() {
         return "Deleted";
     }
