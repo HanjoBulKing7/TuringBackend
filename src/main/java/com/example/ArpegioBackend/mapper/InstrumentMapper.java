@@ -10,6 +10,10 @@ public interface InstrumentMapper extends GenericMapper<Instrument, InstrumentDT
 
 
     @Override
-    @Mapping(target = "category", ignore = true)
+    @Mapping(target = "category", ignore = true) // lo seteas manual en el service
     Instrument mapToEntity(InstrumentDTO dto);
+
+    @Override
+    @Mapping(source = "category.id", target = "categoryId")
+    InstrumentDTO mapToDto(Instrument entity);
 }
