@@ -3,6 +3,8 @@ package com.example.ArpegioBackend.config;
 import com.example.ArpegioBackend.entity.PERMISSIONS;
 import com.example.ArpegioBackend.entity.Role;
 import com.example.ArpegioBackend.filters.JwtAuthFilter;
+import com.example.ArpegioBackend.security.JwtAccessDeniedHandler;
+import com.example.ArpegioBackend.security.JwtAuthenticationEntryPoint;
 import com.example.ArpegioBackend.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +32,8 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtAuthFilter jwtAuthFilter;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,12 +42,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth->
                                 auth
-                                        .requestMatchers("/authenticate").permitAll()
+                                        .requestMatchers("/login").permitAll()
                                         .requestMatchers("/signup").permitAll()
                                         .anyRequest().authenticated())
                 .addFilterBefore(
                         jwtAuthFilter, UsernamePasswordAuthenticationFilter.class
-                );
+                )
+                .exceptionHandling(exception -> exception
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler));
+
 
         return http.build();
     }
