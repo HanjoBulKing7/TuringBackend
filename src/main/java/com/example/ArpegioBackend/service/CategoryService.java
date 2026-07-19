@@ -9,4 +9,6 @@ public interface CategoryService {
 
      ApiResponse<CategoryDTO> addCategory(CategoryDTO categoryDTO);
      ApiResponse<PageResponse<CategoryDTO>> getAllCategories(int page, int size, String sortBy, String direction);
+     ApiResponse<CategoryDTO> getCategory(Long id);
+
 }

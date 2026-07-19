@@ -1,13 +1,12 @@
 package com.example.ArpegioBackend.service;
 
 import com.example.ArpegioBackend.entity.Category;
+import com.example.ArpegioBackend.exception.DuplicateResourceException;
 import com.example.ArpegioBackend.mapper.CategoryMapper;
 import com.example.ArpegioBackend.payload.ApiResponse;
 import com.example.ArpegioBackend.payload.CategoryDTO;
 import com.example.ArpegioBackend.payload.PageResponse;
-import com.example.ArpegioBackend.payload.PagebaleResponse;
 import com.example.ArpegioBackend.repository.CategoryRepository;
-import com.example.ArpegioBackend.utils.PageUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,8 +29,9 @@ public class CategoryServiceImpl implements CategoryService{
 
         Optional<Category> existingCategory = categoryRepository.findByName(categoryDTO.name());
 
-        if(existingCategory.isPresent())
-            throw new RuntimeException("Category already exists");
+        if (existingCategory.isPresent())
+            throw new DuplicateResourceException("Category already exists");
+
 
         Category savedCategory = categoryRepository.save(categoryMapper.mapToEntity(categoryDTO));
 
@@ -71,6 +71,11 @@ public class CategoryServiceImpl implements CategoryService{
                 pageResponse,
                 LocalDateTime.now()
         );
+    }
+
+    @Override
+    public ApiResponse<CategoryDTO> getCategory(Long id) {
+        return null;
     }
 
 
