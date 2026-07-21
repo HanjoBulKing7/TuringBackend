@@ -18,7 +18,6 @@ public class AuthServiceImpl implements AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
-    private final UserDetails userDetails;
 
     @Override
     public String authenticateUser(AuthRequest authRequest) {
