@@ -1,4 +1,4 @@
-# Arpegio Backend 🎛️
+# Arpegio Backend 🎛️🍃
 
 API REST con Spring Boot para gestionar el catálogo, usuarios y la lógica de negocio de la tienda de instrumentos musicales Arpegio.
 
