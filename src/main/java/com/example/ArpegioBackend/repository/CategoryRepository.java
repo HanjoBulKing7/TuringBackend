@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface CategoryRepository  extends JpaRepository<Category, Long> {
 
 
-    Optional<Category> findByName(@NotBlank( message = "Category must have a name") CategoryType name);
+    Optional<Category> findByName(@NotBlank( message = "Category must have a name") String name);
 }

@@ -20,7 +20,7 @@ public class InstrumentController {
     @GetMapping
     public ResponseEntity<ApiResponse<PageResponse<InstrumentDTO>>> getAllInstruments(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "9") int size,
+            @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "name") String sortBy,
             @RequestParam(defaultValue = "asc") String direction) {
 
@@ -37,7 +37,7 @@ public class InstrumentController {
     public ResponseEntity<ApiResponse<PageResponse<InstrumentDTO>>> getByCategory(
             @PathVariable Long categoryId,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "9") int size,
+            @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "name") String sortBy,
             @RequestParam(defaultValue = "asc") String direction) {
 

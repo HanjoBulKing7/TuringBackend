@@ -13,8 +13,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private CategoryType name;
+    @Column( unique = true )
+    private String name;
     @Size(max = 300)
     private String description;
 }

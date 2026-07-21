@@ -22,5 +22,7 @@ public record InstrumentDTO(
         String description,
         @NotNull
         @Min(0)
-        Integer stock
+        Integer stock,
+        @Size(max = 500)
+        String imageUrl
 ) {}

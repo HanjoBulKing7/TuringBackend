@@ -27,6 +27,9 @@ public class Instrument {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    @Column(length = 500)
+    private String imageUrl;
+
     @NotBlank
     @Size(max = 60)
     private String model;
